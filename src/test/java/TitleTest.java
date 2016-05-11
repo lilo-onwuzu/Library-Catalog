@@ -3,6 +3,7 @@ import static org.junit.Assert.*;
 import org.sql2o.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TitleTest {
 
@@ -83,7 +84,6 @@ public class TitleTest {
     assertEquals(1, savedAuthors.size());
   }
 
-  // AUTHOR AND TITLE DELETION
   @Test
   public void delete_deletesAllTitlesAndAuthorsAssociations() {
     Author myAuthor = new Author("JK Rowling");
@@ -93,6 +93,19 @@ public class TitleTest {
     myTitle.addAuthor(myAuthor);
     myTitle.delete();
     assertEquals(0, myAuthor.getTitles().size());
+  }
+
+  @Test
+  public void getCopies_retrievesAllCopiesFromDatabase_List() {
+    Title myTitle = new Title("title");
+    myTitle.save();
+    Copy firstCopy = new Copy(1,myTitle.getId());
+    firstCopy.save();
+    Copy secondCopy = new Copy(2,myTitle.getId());
+    secondCopy.save();
+    // make an array of copy objects
+    Copy[] allCopies = new Copy[] {firstCopy, secondCopy};
+    assertTrue(myTitle.getCopies().containsAll(Arrays.asList(allCopies)));
   }
 
 }

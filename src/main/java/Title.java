@@ -20,6 +20,16 @@ public class Title {
    return id;
   }
 
+  // getcopies() method for copies/titles one to many relationship
+  public List<Copy> getCopies() {
+    String sql = "SELECT * FROM copies where title_id=:titleId";
+    try (Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("titleId", this.id)
+        .executeAndFetch(Copy.class);
+    }
+  }
+
   // all() will collect the static list of all the rows or objects in the DB. The DB class is defined in DB.java file and references the library DB
   public static List<Title> all(){
     String sql = "SELECT * FROM titles";

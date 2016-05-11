@@ -50,7 +50,7 @@ public class PatronTest {
   }
 
   @Test
-  public void update_updateTaskDescriptionInDatabase_true() {
+  public void update_updatePatronDescriptionInDatabase_true() {
     Patron testPatron = new Patron("patron");
     testPatron.save();
     testPatron.update("other patron");
@@ -59,7 +59,7 @@ public class PatronTest {
 
   @Test
   public void addPatron_addsPatronToCopy_true() {
-    Copy myCopy = new Copy(2);
+    Copy myCopy = new Copy(2,2);
     myCopy.save();
     Patron myPatron = new Patron("James Blake");
     myPatron.save();
@@ -70,7 +70,7 @@ public class PatronTest {
 
   @Test
   public void getPatron_getsPatronForACopy_true() {
-    Copy myBook = new Copy(2);
+    Copy myBook = new Copy(2,2);
     myBook.save();
     Patron myPatron = new Patron("James Blake");
     myPatron.save();
@@ -83,7 +83,7 @@ public class PatronTest {
   public void delete_deletesAllCopiesAndPatronsAssociations() {
     Patron myPatron = new Patron("JK Rowling");
     myPatron.save();
-    Copy myCopy = new Copy(2);
+    Copy myCopy = new Copy(2,2);
     myCopy.save();
     myCopy.addPatron(myPatron);
     myCopy.delete();

@@ -80,7 +80,8 @@ ALTER TABLE authors_titles OWNER TO "Guest";
 
 CREATE TABLE copies (
     id integer NOT NULL,
-    copy integer
+    copy integer,
+    title_id integer
 );
 
 
@@ -105,6 +106,40 @@ ALTER TABLE copies_id_seq OWNER TO "Guest";
 --
 
 ALTER SEQUENCE copies_id_seq OWNED BY copies.id;
+
+
+--
+-- Name: copies_patrons; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+--
+
+CREATE TABLE copies_patrons (
+    id integer NOT NULL,
+    copy_id integer,
+    patron_id integer
+);
+
+
+ALTER TABLE copies_patrons OWNER TO "Guest";
+
+--
+-- Name: copies_patrons_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE copies_patrons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE copies_patrons_id_seq OWNER TO "Guest";
+
+--
+-- Name: copies_patrons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE copies_patrons_id_seq OWNED BY copies_patrons.id;
 
 
 --
@@ -191,6 +226,13 @@ ALTER TABLE ONLY copies ALTER COLUMN id SET DEFAULT nextval('copies_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
+ALTER TABLE ONLY copies_patrons ALTER COLUMN id SET DEFAULT nextval('copies_patrons_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
 ALTER TABLE ONLY patrons ALTER COLUMN id SET DEFAULT nextval('patrons_id_seq'::regclass);
 
 
@@ -228,7 +270,7 @@ COPY authors_titles (author_id, title_id) FROM stdin;
 -- Data for Name: copies; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY copies (id, copy) FROM stdin;
+COPY copies (id, copy, title_id) FROM stdin;
 \.
 
 
@@ -237,6 +279,21 @@ COPY copies (id, copy) FROM stdin;
 --
 
 SELECT pg_catalog.setval('copies_id_seq', 1, false);
+
+
+--
+-- Data for Name: copies_patrons; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY copies_patrons (id, copy_id, patron_id) FROM stdin;
+\.
+
+
+--
+-- Name: copies_patrons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('copies_patrons_id_seq', 1, false);
 
 
 --
@@ -275,6 +332,14 @@ SELECT pg_catalog.setval('titles_id_seq', 1, false);
 
 ALTER TABLE ONLY authors
     ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: copies_patrons_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+--
+
+ALTER TABLE ONLY copies_patrons
+    ADD CONSTRAINT copies_patrons_pkey PRIMARY KEY (id);
 
 
 --

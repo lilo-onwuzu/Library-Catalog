@@ -3,11 +3,13 @@ import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Copy {
-  private int copy;
   private int id;
+  private int copy;
+  private int title_id;
 
-  public Copy(int copy) {
+  public Copy(int copy, int title_id) {
     this.copy = copy;
+    this.title_id = title_id;
   }
 
   public int getCopy() {
@@ -18,8 +20,20 @@ public class Copy {
    return id;
   }
 
+  // every book copy should be able to return it's title
+  // Copy and Title have a one to many relationships
+  // In many to many relationships, you will need add*() get*() methods in BOTH classes as well as a join table
+  // In one to many relationships, you only need a get*() method in the "one" or subject class and a add*() method in the "many" or object class
+  // In title and copies O2M relationship, title is the subject class and copies is the object class. Therefore we will need a getCopies() method in the Title class and an addTitle() method in the Copies class
+  // In this particular case, we do not need an addTitles() method because we are requiring the Title object to be already made and id to be attached when the copy object is made
+  // you need classes when you want to add a changing attribute/property and copy that template/form across multiple elements without having to recreate it
+  // you could also use a class when you want to perform a function to a group of elements at once
+  public int getTitleId() {
+    return title_id;
+  }
+
   public static List<Copy> all(){
-    String sql = "SELECT id, copy FROM copies";
+    String sql = "SELECT * FROM copies";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Copy.class);
     }
@@ -32,16 +46,18 @@ public class Copy {
     } else {
       Copy newCopy = (Copy) otherCopy;
       return this.getCopy() == newCopy.getCopy() &&
-             this.getId() == newCopy.getId();
+             this.getId() == newCopy.getId() &&
+             this.getTitleId() == newCopy.getTitleId();
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO copies (copy) VALUES (:copy);";
+      String sql = "INSERT INTO copies (copy, title_id) VALUES (:copy, :title_id);";
       // collect the primary key assigned through the DB, type-cast it to become an integer object and then assign it to the copy_id
       this.id = (int) con.createQuery(sql, true)
         .addParameter("copy", this.copy)
+        .addParameter("title_id", title_id)
         .executeUpdate()
         .getKey();
     }
@@ -57,11 +73,21 @@ public class Copy {
     }
   }
 
-  public void update(int update) {
+  public void updateID(int newId) {
     String sql = "UPDATE copies SET copy=:copy WHERE id=:id";
     try(Connection con = DB.sql2o.open()) {
       con.createQuery(sql)
-        .addParameter("copy", update)
+        .addParameter("copy", newId)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
+  public void updateTitleID(int titleID) {
+    String sql = "UPDATE copies SET title_id=:title_id WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("title_id", titleID)
         .addParameter("id", this.id)
         .executeUpdate();
     }
