@@ -58,11 +58,35 @@ public class PatronTest {
   }
 
   @Test
-  public void delete_deletesTaskInDatabase_true() {
-    Patron testPatron = new Patron("patron");
-    testPatron.save();
-    int id = testPatron.getId();
-    testPatron.delete();
-    assertEquals(Patron.all().size(), 0);
+  public void addPatron_addsPatronToCopy_true() {
+    Copy myCopy = new Copy(2);
+    myCopy.save();
+    Patron myPatron = new Patron("James Blake");
+    myPatron.save();
+    myCopy.addPatron(myPatron);
+    Patron savedPatron = myCopy.getPatrons().get(0);
+    assertTrue(myPatron.equals(savedPatron));
+  }
+
+  @Test
+  public void getPatron_getsPatronForACopy_true() {
+    Copy myBook = new Copy(2);
+    myBook.save();
+    Patron myPatron = new Patron("James Blake");
+    myPatron.save();
+    myBook.addPatron(myPatron);
+    List savedPatrons = myBook.getPatrons();
+    assertEquals(1, savedPatrons.size());
+  }
+
+  @Test
+  public void delete_deletesAllCopiesAndPatronsAssociations() {
+    Patron myPatron = new Patron("JK Rowling");
+    myPatron.save();
+    Copy myCopy = new Copy(2);
+    myCopy.save();
+    myCopy.addPatron(myPatron);
+    myCopy.delete();
+    assertEquals(0, myPatron.getCopies().size());
   }
 }

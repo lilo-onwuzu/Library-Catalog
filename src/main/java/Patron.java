@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Patron {
@@ -66,12 +67,47 @@ public class Patron {
     }
   }
 
-  public void delete() {
-    String sql = "DELETE FROM patrons WHERE id=:id";
+  public void addCopy(Copy myCopy) {
+    String sql = "INSERT INTO copies_patrons (copy_id, patron_id) VALUES (:copy_id, :patron_id)";
     try(Connection con = DB.sql2o.open()) {
       con.createQuery(sql)
-        .addParameter("id", this.id)
+        .addParameter("copy_id", myCopy.getId())
+        .addParameter("patron_id", this.getId())
         .executeUpdate();
     }
   }
+
+  public List<Copy> getCopies() {
+    String joinQuery = "SELECT copy_id FROM copies_patrons WHERE patron_id=:patron_id";
+    try (Connection con = DB.sql2o.open()) {
+      List<Integer> copyIds = con.createQuery(joinQuery)
+        .addParameter("patron_id", this.getId())
+        .executeAndFetch(Integer.class);
+
+      List<Copy> copyList = new ArrayList<Copy>();
+
+      for (Integer copyId : copyIds) {
+        String taskQuery = "SELECT * FROM copies WHERE id=:copy_id";
+          Copy patron_copy = con.createQuery(taskQuery)
+            .addParameter("copy_id", copyId)
+            .executeAndFetchFirst(Copy.class);
+            copyList.add(patron_copy);
+      }
+      return copyList;
+    }
+  }
+
+  public void delete() {
+    String deleteQuery = "DELETE FROM patrons WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(deleteQuery)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    String joinDeleteQuery = "DELETE FROM copies_patrons WHERE patron_id=:patron_id";
+      con.createQuery(joinDeleteQuery)
+        .addParameter("patron_id", this.getId())
+        .executeUpdate();
+    }
+  }
+
 }

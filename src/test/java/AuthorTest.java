@@ -58,15 +58,6 @@ public class AuthorTest {
     assertEquals("other author", Author.find(testAuthor.getId()).getName());
   }
 
-  // @Test
-  // public void delete_deletesAuthorInDatabase_true() {
-  //   Author testAuthor = new Author("author");
-  //   testAuthor.save();
-  //   int id = testAuthor.getId();
-  //   testAuthor.delete();
-  //   assertEquals(Author.all().size(), 0);
-  // }
-
   @Test
   public void addTitle_addsTitleToAuthor_true() {
     Author myAuthor = new Author("James Blake");

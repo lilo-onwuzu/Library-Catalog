@@ -58,15 +58,6 @@ public class TitleTest {
     assertEquals("other title", Title.find(testTitle.getId()).getName());
   }
 
-  // @Test
-  // public void delete_deletesTitleInDatabase_true() {
-  //   Title testTitle = new Title("title");
-  //   testTitle.save();
-  //   int id = testTitle.getId();
-  //   testTitle.delete();
-  //   assertEquals(Title.all().size(), 0);
-  // }
-
   @Test
   public void addAuthor_addsAuthorToTitle_true() {
     Title myTitle = new Title("Boy Meets World");
