@@ -67,15 +67,6 @@ public class Author {
     }
   }
 
-  public void delete() {
-    String sql = "DELETE FROM authors WHERE id=:id";
-    try(Connection con = DB.sql2o.open()) {
-      con.createQuery(sql)
-        .addParameter("id", this.id)
-        .executeUpdate();
-    }
-  }
-
   // addTitle() inserts author/title relationship matrix using author_id and title_id integers into the authors_titles join table DB
   public void addTitle(Title myTitle) {
     // author_id and title_id are the two fields in the authors_titles join table
@@ -110,6 +101,21 @@ public class Author {
         titleList.add(author_title);
       }
       return titleList;
+    }
+  }
+
+  public void delete() {
+    // delete the author from authors table
+    String deleteQuery = "DELETE FROM authors WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(deleteQuery)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    // then delete the author's row in the join table as well
+    String joinDeleteQuery = "DELETE FROM authors_titles WHERE author_id=:author_id";
+      con.createQuery(joinDeleteQuery)
+        .addParameter("author_id", this.getId())
+        .executeUpdate();
     }
   }
 

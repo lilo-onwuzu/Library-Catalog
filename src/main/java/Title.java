@@ -76,16 +76,6 @@ public class Title {
     }
   }
 
-  // Title myTitle.delete() for instance finds the row where id equals this.id OR myTitle.id and deletes it
-  public void delete() {
-    String sql = "DELETE FROM titles WHERE id=:id";
-    try(Connection con = DB.sql2o.open()) {
-      con.createQuery(sql)
-        .addParameter("id", this.id)
-        .executeUpdate();
-    }
-  }
-
   // addAuthor() inserts title/author relationship matrix using author_id and title_id integers into the authors_titles join table DB
   public void addAuthor(Author myAuthor) {
     // author_id and title_id are the two fields in the authors_titles join table
@@ -120,6 +110,22 @@ public class Title {
             authorList.add(title_author);
       }
       return authorList;
+    }
+  }
+
+  // Title myTitle.delete() for instance finds the row where id equals this.id OR myTitle.id and deletes it
+  public void delete() {
+    // delete the title from titles table
+    String deleteQuery = "DELETE FROM titles WHERE id=:id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(deleteQuery)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    // then delete the title's row in the join table as well
+    String joinDeleteQuery = "DELETE FROM authors_titles WHERE title_id=:title_id";
+      con.createQuery(joinDeleteQuery)
+        .addParameter("title_id", this.getId())
+        .executeUpdate();
     }
   }
 

@@ -51,21 +51,21 @@ public class TitleTest {
   }
 
   @Test
-  public void update_updateTaskDescriptionInDatabase_true() {
+  public void update_updateTitleDescriptionInDatabase_true() {
     Title testTitle = new Title("title");
     testTitle.save();
     testTitle.update("other title");
     assertEquals("other title", Title.find(testTitle.getId()).getName());
   }
 
-  @Test
-  public void delete_deletesTaskInDatabase_true() {
-    Title testTitle = new Title("title");
-    testTitle.save();
-    int id = testTitle.getId();
-    testTitle.delete();
-    assertEquals(Title.all().size(), 0);
-  }
+  // @Test
+  // public void delete_deletesTitleInDatabase_true() {
+  //   Title testTitle = new Title("title");
+  //   testTitle.save();
+  //   int id = testTitle.getId();
+  //   testTitle.delete();
+  //   assertEquals(Title.all().size(), 0);
+  // }
 
   @Test
   public void addAuthor_addsAuthorToTitle_true() {
@@ -90,6 +90,18 @@ public class TitleTest {
     myBook.addAuthor(myAuthor);
     List savedAuthors = myBook.getAuthors();
     assertEquals(1, savedAuthors.size());
+  }
+
+  // AUTHOR AND TITLE DELETION
+  @Test
+  public void delete_deletesAllTitlesAndAuthorsAssociations() {
+    Author myAuthor = new Author("JK Rowling");
+    myAuthor.save();
+    Title myTitle = new Title("Harry Potter");
+    myTitle.save();
+    myTitle.addAuthor(myAuthor);
+    myTitle.delete();
+    assertEquals(0, myAuthor.getTitles().size());
   }
 
 }

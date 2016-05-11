@@ -51,21 +51,21 @@ public class AuthorTest {
   }
 
   @Test
-  public void update_updateTaskDescriptionInDatabase_true() {
+  public void update_updateAuthorNameInDatabase_true() {
     Author testAuthor = new Author("author");
     testAuthor.save();
     testAuthor.update("other author");
     assertEquals("other author", Author.find(testAuthor.getId()).getName());
   }
 
-  @Test
-  public void delete_deletesTaskInDatabase_true() {
-    Author testAuthor = new Author("author");
-    testAuthor.save();
-    int id = testAuthor.getId();
-    testAuthor.delete();
-    assertEquals(Author.all().size(), 0);
-  }
+  // @Test
+  // public void delete_deletesAuthorInDatabase_true() {
+  //   Author testAuthor = new Author("author");
+  //   testAuthor.save();
+  //   int id = testAuthor.getId();
+  //   testAuthor.delete();
+  //   assertEquals(Author.all().size(), 0);
+  // }
 
   @Test
   public void addTitle_addsTitleToAuthor_true() {
@@ -87,5 +87,16 @@ public class AuthorTest {
     myAuthor.addTitle(myTitle);
     List savedTitles = myAuthor.getTitles();
     assertEquals(1, savedTitles.size());
+  }
+
+  @Test
+  public void deleteAuthors_deletesAuthorsfromDatabase_true() {
+    Author myAuthor = new Author("Bram Stoker");
+    myAuthor.save();
+    Title myTitle = new Title("Dracula");
+    myTitle.save();
+    myAuthor.addTitle(myTitle);
+    myAuthor.delete();
+    assertEquals(0, myTitle.getAuthors().size());
   }
 }

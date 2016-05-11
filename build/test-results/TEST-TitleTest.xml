@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TitleTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-05-11T18:11:58" hostname="epicodus-68.local" time="0.135">
+<testsuite name="TitleTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2016-05-11T18:37:12" hostname="epicodus-68.local" time="0.143">
   <properties/>
   <testcase name="save_savesObjectIntoDatabase_true" classname="TitleTest" time="0.012"/>
-  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="TitleTest" time="0.016"/>
-  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="TitleTest" time="0.004"/>
-  <testcase name="addAuthor_addsAuthorToTitle_true" classname="TitleTest" time="0.022"/>
-  <testcase name="getAuthor_getsAuthorForATitle_true" classname="TitleTest" time="0.022"/>
-  <testcase name="find_findTitleInDatabase_true" classname="TitleTest" time="0.016"/>
+  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="TitleTest" time="0.005"/>
+  <testcase name="update_updateTitleDescriptionInDatabase_true" classname="TitleTest" time="0.017"/>
+  <testcase name="delete_deletesAllTitlesAndAuthorsAssociations" classname="TitleTest" time="0.024"/>
+  <testcase name="addAuthor_addsAuthorToTitle_true" classname="TitleTest" time="0.021"/>
+  <testcase name="getAuthor_getsAuthorForATitle_true" classname="TitleTest" time="0.021"/>
+  <testcase name="find_findTitleInDatabase_true" classname="TitleTest" time="0.017"/>
   <testcase name="save_assignsIdToObject_int" classname="TitleTest" time="0.012"/>
-  <testcase name="all_EmptyAtFirst_true" classname="TitleTest" time="0.007"/>
-  <testcase name="delete_deletesTaskInDatabase_true" classname="TitleTest" time="0.016"/>
-  <testcase name="Title_InstantiatesWithString_true" classname="TitleTest" time="0.004"/>
+  <testcase name="all_EmptyAtFirst_true" classname="TitleTest" time="0.008"/>
+  <testcase name="Title_InstantiatesWithString_true" classname="TitleTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
