@@ -105,7 +105,7 @@ public class Author {
       for (Integer titleId : titleIds) {
         String taskQuery = "SELECT * FROM titles WHERE id=:title_id";
         Title author_title = con.createQuery(taskQuery)
-          .addParameter("titleId", titleId)
+          .addParameter("title_id", titleId)
           .executeAndFetchFirst(Title.class);
         titleList.add(author_title);
       }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CopyTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-05-11T05:51:33" hostname="epicodus-58.local" time="0.103">
+<testsuite name="CopyTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-05-11T18:11:58" hostname="epicodus-68.local" time="0.164">
   <properties/>
   <testcase name="save_savesObjectIntoDatabase_true" classname="CopyTest" time="0.013"/>
-  <testcase name="find_findCopyInDatabase_true" classname="CopyTest" time="0.016"/>
-  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="CopyTest" time="0.025"/>
-  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="CopyTest" time="0.004"/>
-  <testcase name="Copy_InstantiatesWithString_true" classname="CopyTest" time="0.005"/>
-  <testcase name="save_assignsIdToObject_int" classname="CopyTest" time="0.015"/>
+  <testcase name="find_findCopyInDatabase_true" classname="CopyTest" time="0.017"/>
+  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="CopyTest" time="0.017"/>
+  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="CopyTest" time="0.005"/>
+  <testcase name="Copy_InstantiatesWithString_true" classname="CopyTest" time="0.004"/>
+  <testcase name="save_assignsIdToObject_int" classname="CopyTest" time="0.014"/>
   <testcase name="all_EmptyAtFirst_true" classname="CopyTest" time="0.008"/>
-  <testcase name="delete_deletesTaskInDatabase_true" classname="CopyTest" time="0.016"/>
+  <testcase name="delete_deletesTaskInDatabase_true" classname="CopyTest" time="0.083"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
