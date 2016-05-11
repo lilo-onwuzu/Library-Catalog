@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Title {
@@ -73,5 +74,34 @@ public class Title {
         .addParameter("id", this.id)
         .executeUpdate();
     }
+  }
+
+  public void addAuthor(Author myAuthor) {
+    String sql = "INSERT INTO authors_titles (author_id, title_id) VALUES (:author_id, :title_id)";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("author_id", author.getId())
+        .addParameter("title_id", this.getId())
+        .executeUpdate();
+    }
+  }
+
+  // addAuthors() makes a join table of relationships between author and books using author id and title id. To get all the authors that have a relationship with one book, we would need to sift through all the rows in the join table to see where the title_id is called, export the author id's attached to those rows into a list<integer author_id> and then sift through the authors table to collect the arraylist of author names that match those author_ids
+  public List<Author> getAuthors() {
+    String joinQuery = "SELECT author_id FROM authors_titles WHERE title_id=:title_id";
+    List<Integer> authorIds = con.createQuery(joinQuery)
+      .addParameter("title_id", this.getId())
+      .executeAndFetch(Integer.class);
+
+      List<Author> authorList = new ArrayList<Author>();
+
+      for (Integer authorId : authorList) {
+        String taskQuery = "SELECT * FROM authors WHERE id=:author_id";
+        Author author = con.createQuery(taskQuery)
+          .addParameter("authorId", authorId)
+          .executeAndFetchFirst(Author.class);
+        authorList.add(author);
+      }
+      return authorList;
   }
 }

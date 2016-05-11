@@ -65,4 +65,19 @@ public class TitleTest {
     testTitle.delete();
     assertEquals(Title.all().size(), 0);
   }
+
+  @Test
+  public void addAuthor_addsAuthorToTitle_true() {
+    Title myBook = new Title("Boy Meets World");
+    // adds Book to list of books
+    myBook.save();
+    Author myAuthor = new Author("James Blake");
+    // adds Author to list of authors
+    myAuthor.save();
+    // create relationship between author and book
+    myTitle.addAuthor(myAuthor);
+    List savedAuthors = myTitle.getAuthors();
+    assertEquals(1, savedAuthors.size());
+  }
+
 }

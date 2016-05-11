@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TitleTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-05-10T22:54:15" hostname="epicodus-68.local" time="0.204">
+<testsuite name="TitleTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-05-11T00:17:22" hostname="epicodus-68.local" time="0.093">
   <properties/>
-  <testcase name="save_savesObjectIntoDatabase_true" classname="TitleTest" time="0.112"/>
-  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="TitleTest" time="0.021"/>
-  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="TitleTest" time="0.005"/>
-  <testcase name="find_findTitleInDatabase_true" classname="TitleTest" time="0.018"/>
-  <testcase name="save_assignsIdToObject_int" classname="TitleTest" time="0.015"/>
+  <testcase name="save_savesObjectIntoDatabase_true" classname="TitleTest" time="0.013"/>
+  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="TitleTest" time="0.018"/>
+  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="TitleTest" time="0.004"/>
+  <testcase name="find_findTitleInDatabase_true" classname="TitleTest" time="0.015"/>
+  <testcase name="save_assignsIdToObject_int" classname="TitleTest" time="0.012"/>
   <testcase name="all_EmptyAtFirst_true" classname="TitleTest" time="0.008"/>
   <testcase name="delete_deletesTaskInDatabase_true" classname="TitleTest" time="0.017"/>
-  <testcase name="Title_InstantiatesWithString_true" classname="TitleTest" time="0.005"/>
+  <testcase name="Title_InstantiatesWithString_true" classname="TitleTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

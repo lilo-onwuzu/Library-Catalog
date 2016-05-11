@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PatronTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-05-11T00:17:22" hostname="epicodus-68.local" time="0.096">
+  <properties/>
+  <testcase name="save_savesObjectIntoDatabase_true" classname="PatronTest" time="0.014"/>
+  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="PatronTest" time="0.017"/>
+  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="PatronTest" time="0.005"/>
+  <testcase name="find_findPatronInDatabase_true" classname="PatronTest" time="0.016"/>
+  <testcase name="Patron_InstantiatesWithString_true" classname="PatronTest" time="0.004"/>
+  <testcase name="save_assignsIdToObject_int" classname="PatronTest" time="0.013"/>
+  <testcase name="all_EmptyAtFirst_true" classname="PatronTest" time="0.009"/>
+  <testcase name="delete_deletesTaskInDatabase_true" classname="PatronTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

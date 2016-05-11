@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AuthorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2016-05-11T00:17:21" hostname="epicodus-68.local" time="0.202">
+  <properties/>
+  <testcase name="save_savesObjectIntoDatabase_true" classname="AuthorTest" time="0.11"/>
+  <testcase name="update_updateTaskDescriptionInDatabase_true" classname="AuthorTest" time="0.02"/>
+  <testcase name="equals_returnsTrueIfDescriptionsAreTheSame_true" classname="AuthorTest" time="0.005"/>
+  <testcase name="Author_InstantiatesWithString_true" classname="AuthorTest" time="0.005"/>
+  <testcase name="save_assignsIdToObject_int" classname="AuthorTest" time="0.014"/>
+  <testcase name="all_EmptyAtFirst_true" classname="AuthorTest" time="0.011"/>
+  <testcase name="find_findAuthorInDatabase_true" classname="AuthorTest" time="0.017"/>
+  <testcase name="delete_deletesTaskInDatabase_true" classname="AuthorTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
