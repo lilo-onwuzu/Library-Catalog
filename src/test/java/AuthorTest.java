@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class AuthorTest {
 
@@ -64,5 +65,27 @@ public class AuthorTest {
     int id = testAuthor.getId();
     testAuthor.delete();
     assertEquals(Author.all().size(), 0);
+  }
+
+  @Test
+  public void addTitle_addsTitleToAuthor_true() {
+    Author myAuthor = new Author("James Blake");
+    myAuthor.save();
+    Title myTitle = new Title("Boy Meets World");
+    myTitle.save();
+    myAuthor.addTitle(myTitle);
+    List savedTitles = myAuthor.getTitles();
+    assertEquals(1, savedTitles.size());
+  }
+
+  @Test
+  public void getTitles_getsTitlesForAnAuthor_true() {
+    Author myAuthor = new Author("James Blake");
+    myAuthor.save();
+    Title myTitle = new Title("Boy meets World");
+    myTitle.save();
+    myAuthor.addTitle(myTitle);
+    List savedTitles = myAuthor.getTitles();
+    assertEquals(1, savedTitles.size());
   }
 }

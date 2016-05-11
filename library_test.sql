@@ -63,6 +63,18 @@ ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
 
 
 --
+-- Name: authors_titles; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+--
+
+CREATE TABLE authors_titles (
+    author_id integer,
+    title_id integer
+);
+
+
+ALTER TABLE authors_titles OWNER TO "Guest";
+
+--
 -- Name: copies; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
@@ -201,7 +213,19 @@ COPY authors (id, name) FROM stdin;
 -- Name: authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('authors_id_seq', 5, true);
+SELECT pg_catalog.setval('authors_id_seq', 9, true);
+
+
+--
+-- Data for Name: authors_titles; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY authors_titles (author_id, title_id) FROM stdin;
+2	1
+4	2
+8	5
+9	6
+\.
 
 
 --
@@ -246,7 +270,7 @@ COPY titles (id, name) FROM stdin;
 -- Name: titles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('titles_id_seq', 5, true);
+SELECT pg_catalog.setval('titles_id_seq', 9, true);
 
 
 --

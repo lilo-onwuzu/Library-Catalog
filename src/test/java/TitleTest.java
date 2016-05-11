@@ -2,6 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import org.sql2o.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class TitleTest {
 
@@ -68,15 +69,26 @@ public class TitleTest {
 
   @Test
   public void addAuthor_addsAuthorToTitle_true() {
-    Title myBook = new Title("Boy Meets World");
+    Title myTitle = new Title("Boy Meets World");
     // adds Book to list of books
-    myBook.save();
+    myTitle.save();
     Author myAuthor = new Author("James Blake");
     // adds Author to list of authors
     myAuthor.save();
     // create relationship between author and book
     myTitle.addAuthor(myAuthor);
-    List savedAuthors = myTitle.getAuthors();
+    Author savedAuthor = myTitle.getAuthors().get(0);
+    assertTrue(myAuthor.equals(savedAuthor));
+  }
+
+  @Test
+  public void getAuthor_getsAuthorForATitle_true() {
+    Title myBook = new Title("Boy meets World");
+    myBook.save();
+    Author myAuthor = new Author("James Blake");
+    myAuthor.save();
+    myBook.addAuthor(myAuthor);
+    List savedAuthors = myBook.getAuthors();
     assertEquals(1, savedAuthors.size());
   }
 

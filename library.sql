@@ -67,34 +67,12 @@ ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
 --
 
 CREATE TABLE authors_titles (
-    id integer NOT NULL,
     author_id integer,
     title_id integer
 );
 
 
 ALTER TABLE authors_titles OWNER TO "Guest";
-
---
--- Name: authors_titles_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
---
-
-CREATE SEQUENCE authors_titles_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE authors_titles_id_seq OWNER TO "Guest";
-
---
--- Name: authors_titles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
---
-
-ALTER SEQUENCE authors_titles_id_seq OWNED BY authors_titles.id;
-
 
 --
 -- Name: copies; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
@@ -206,13 +184,6 @@ ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY authors_titles ALTER COLUMN id SET DEFAULT nextval('authors_titles_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
---
-
 ALTER TABLE ONLY copies ALTER COLUMN id SET DEFAULT nextval('copies_id_seq'::regclass);
 
 
@@ -249,15 +220,8 @@ SELECT pg_catalog.setval('authors_id_seq', 1, false);
 -- Data for Name: authors_titles; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY authors_titles (id, author_id, title_id) FROM stdin;
+COPY authors_titles (author_id, title_id) FROM stdin;
 \.
-
-
---
--- Name: authors_titles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
---
-
-SELECT pg_catalog.setval('authors_titles_id_seq', 1, false);
 
 
 --
@@ -311,14 +275,6 @@ SELECT pg_catalog.setval('titles_id_seq', 1, false);
 
 ALTER TABLE ONLY authors
     ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
-
-
---
--- Name: authors_titles_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
---
-
-ALTER TABLE ONLY authors_titles
-    ADD CONSTRAINT authors_titles_pkey PRIMARY KEY (id);
 
 
 --
