@@ -24,12 +24,15 @@
   text-decoration: underline;
 }
 body{
-  font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-family: Circular,Helvetica,Arial,sans-serif;
+  font-size: 14px;
   text-align: center;
 }
 
-a:link {
-  list-style-type: none;
-  text-decoration: none;
+body {
+  background-image: url(http://s3.amazonaws.com/FratMusic-Site-Images/assets/cover/1416846214-library1.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color: transparent;
 }

@@ -63,6 +63,7 @@ public class App {
     get("/books/:id", (request, response) -> {
       HashMap model = new HashMap();
       Title title = Title.find(Integer.parseInt(request.params(":id")));
+      request.session().attribute("titleID", title.getId());
       model.put("title", title);
       model.put("authors", title.getAuthors());
       model.put("template", "templates/bookDetails.vtl");
@@ -76,9 +77,22 @@ public class App {
       Author author = new Author(newAuthor);
       author.save();
       title.addAuthor(author);
+      // String newEditAuthor = request.queryParams("editAuthor");
+      // Author updateAuthor = Author.find(Integer.parseInt(request.params("hideAuthorID")));
+      // updateAuthor.update(newEditAuthor);
+      request.session().attribute("titleID", title.getId());
       model.put("title", title);
       model.put("authors", title.getAuthors());
       model.put("template", "templates/bookDetails.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    // delete book by clicking on "delete book" link
+    get("/books/:id/delete", (request, response) -> {
+      HashMap model = new HashMap();
+      Title title = Title.find(Integer.parseInt(request.params(":id")));
+      title.delete();
+      response.redirect("/books");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -91,22 +105,25 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // delete book request by clicking on link
-    get("/books/:id/delete", (request, response) -> {
+    // edit Author details. displays a link to delete author and a form to update Author's name that posts to "/books/:id"
+    get("/books/authors/:id/edit", (request, response) -> {
       HashMap model = new HashMap();
-      Title title = Title.find(Integer.parseInt(request.params(":id")));
-      title.delete();
-      response.redirect("/books");
+      model.put("template", "templates/editAuthor.vtl");
+      Title title = Title.find(request.session().attribute("titleID"));
+      Author author = Author.find(Integer.parseInt(request.params(":id")));
+      model.put("author", author);
+      model.put("title", title);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    // delete author for a book
-    get("/books/:id/authors", (request, response) -> {
+    // delete author from book by clicking on the link. deletes author and redirects to "/books/:id"
+    get("/books/authors/:id/delete", (request, response) -> {
       HashMap model = new HashMap();
-      Title title = Title.find(Integer.parseInt(request.params(":id")));
-      model.put("title", title);
-      model.put("authors", title.getAuthors());
-      model.put("template", "templates/AuthorList.vtl");
+      Author author = Author.find(Integer.parseInt(request.params(":id")));
+      author.delete();
+      Integer titleID = request.session().attribute("titleID");
+      response.redirect("/books/" + titleID);
+      String newInputAuthor = request.queryParams("inputAuthor");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

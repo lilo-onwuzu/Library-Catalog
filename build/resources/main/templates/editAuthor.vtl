@@ -1,0 +1,11 @@
+<h4>$title.getName()</h4>
+
+<a href="/books/authors/$author.getId()/delete">Delete $author.getName() as an Author of $title.getName()</a><br>
+
+<h4>Edit Author's name</h4>
+<form action="/books/$title.getId()" method="post">
+  <input name="hideAuthorID" type="hidden" value="$author.getId()">
+  <label for="editAuthor">Enter name:</label>
+  <input id="editAuthor" name="editAuthor" type="text">
+  <button type="submit" class="btn btn-info">Edit Author's Name</button>
+</form>

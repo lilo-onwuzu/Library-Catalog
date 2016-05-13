@@ -1,20 +1,14 @@
-<h3>$title.getName()</h3>
+<h4>$title.getName()</h4><br>
 
 <strong>Author(s):</strong>
+<br><em><small>Click on an Author's name to edit</small></em><br>
   #foreach ($author in $authors)
-    <em>$author.getName()</em><br>
+      <a href="/books/authors/$author.getId()/edit">$author.getName().</a>
   #end
 <p></p>
-<a href="/books/$title.getId()/add" class="clickToView">Add New Author For $title.getName()</a>
-<strong class="clickToView">|</strong>
-<a href="/books/$title.getId()/authors" class="clickToView">Display List of Authors for $title.getName()</a>
-<p><a class= "clickToView" href="/books/$title.getId()/delete">Delete Book</a></p>
-<p></p>
-<p></p>
-<a href="/" class="clickToView">Return to HomePage</a>
+<a class= "clickToView" href="/books/$title.getId()/delete">Delete Book</a><br>
+<a href="/books/$title.getId()/add" class="clickToView">Add New Author</a>
 <strong class="clickToView">|</strong>
 <a href="/books" class="clickToView">All Books</a>
 <strong class="clickToView">|</strong>
-<a href="/books/new" class="clickToView">Add New Book</a>
-<strong class="clickToView">|</strong>
-<a href="/books/new" class="clickToView">Find Book In Directory</a>
+<a href="/" class="clickToView">Return to HomePage</a>
