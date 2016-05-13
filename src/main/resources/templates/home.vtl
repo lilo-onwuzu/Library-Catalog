@@ -1,0 +1,14 @@
+#if ($userName)
+  <strong>Welcome $userName!</strong>
+#else
+  <form action="/" method="post">
+    <label for="inputName">Hello User, please enter your name:</label>
+    <input id="inputName" name="inputName" type="text">
+    <button type="submit" class="btn btn-info">Submit Name</button>
+  </form>
+#end
+
+<p></p>
+<a href="/books/new" class="clickToView">New Book Entry</a>
+<strong class="clickToView">|</strong>
+<a href="/books/new" class="clickToView">Find Book In Directory</a>

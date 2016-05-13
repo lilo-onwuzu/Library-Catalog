@@ -1,0 +1,35 @@
+.jumbotron{
+  text-align: center;
+  color: #DDB227;
+}
+.btn{
+  background-color: #56A8AE;
+}
+.btn:hover{
+  background-color: #56A8AE;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.clickToView {
+  cursor: pointer;
+  color: #0088cc;
+}
+.clickToView:hover {
+  text-decoration: underline;
+}
+.clickables {
+  cursor: pointer;
+}
+.clickables:hover {
+  text-decoration: underline;
+}
+body{
+  font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+a:link {
+  list-style-type: none;
+  text-decoration: none;
+}
