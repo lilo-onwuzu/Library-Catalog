@@ -127,5 +127,11 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/search", (request, response) -> {
+      HashMap model = new HashMap();
+      model.put("template", "templates/findBook.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
