@@ -3,6 +3,7 @@ import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class App {
   public static void main(String[] args) {
@@ -130,6 +131,44 @@ public class App {
     get("/search", (request, response) -> {
       HashMap model = new HashMap();
       model.put("template", "templates/findBook.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/search/find", (request, response) -> {
+      HashMap model = new HashMap();
+
+      List<Title> foundTitles = null;
+      List<Author> foundAuthors = null;
+      List<Title> titles = Title.all();
+      List<Author> authors = Author.all();
+      String titleName = request.queryParams("titleName");
+      String authorName = request.queryParams("authorName");
+
+      for(Title title : titles) {
+        // mainly use title to find book but if no match comes up then use author to find book
+        if (title.getName().toLowerCase().equals(titleName.toLowerCase())) {
+          foundTitles.add(title);
+        } else {
+            for(Author author : authors) {
+              if (author.getName().toLowerCase().equals(authorName.toLowerCase())) {
+                foundAuthors.add(author);
+                for (Author foundAuthor : foundAuthors) {
+                  ArrayList<Title> titleGroups = new ArrayList<Title>(foundAuthor.getTitles());
+                   for(int x = 0; x < titleGroups.size(); x++) {
+                     ArrayList<Title> newTitleGroups = new ArrayList<Title>();
+                     newTitleGroups.add(titleGroups.get(x));
+                     for(int y = 0; y < newTitleGroups.size(); y++) {
+                       foundTitles = foundTitles.add(newTitleGroups.get(y));
+                     }
+                   }
+                }
+              }
+            }
+          }
+      }
+
+      model.put("foundTitles", foundTitles);
+      model.put("template", "templates/searchList.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 

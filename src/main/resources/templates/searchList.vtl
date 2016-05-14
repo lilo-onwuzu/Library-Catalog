@@ -1,0 +1,5 @@
+<h3>Books found:</h3>
+
+  #foreach ($foundTitle in $foundTitles)
+    <a href="/books/$foundTitle.getId()">$foundTitle.getName()</a><br>
+  #end
